@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
+<aside class="sidebar is-show" id="sidebar">
+    <div class="sidebar-box">
+        <ul class="uk-nav">
+            <li class="nav-list"><a asp-controller="Home" asp-action="Index" asp-area="Home"><img src="~/img/svg/home.svg" /><span>@Localizer["home"]</span></a></li>
+            <li class="uk-nav-header">@Localizer["account"]</li>
+            <li>adsfdsf</li>
+            <li class="nav-list"><a asp-controller="Profile" asp-action="Index" asp-area="Account"><img src="~/img/svg/profile.svg" /><span>@Localizer["profile"]</span></a></li>
+            <li class="nav-list"><a asp-controller="Favourites" asp-action="Index" asp-area="Account"><img src="~/img/svg/favourites.svg" /><span>@Localizer["favourites"]</span><span class="count">15</span></a></li>
+            <li class="nav-list"><a asp-controller="Chats" asp-action="Index" asp-area="Account"><img src="~/img/svg/chats.svg" /><span>@Localizer["chats"]</span></a></li>
+            <li class="nav-list"><a asp-controller="Friends" asp-action="Index" asp-area="Account"><img src="~/img/svg/friends.svg" /><span>@Localizer["friends"]</span></a></li>
+            <li class="nav-list"><a asp-controller="Wallet" asp-action="Index" asp-area="Account"><img src="~/img/svg/wallet.svg" /><span>@Localizer["wallet"]</span></a></li>
+            <li class="uk-nav-header">@Localizer["main"]</li>
+            <li class="nav-list"><a asp-controller="News" asp-action="Index" asp-area="Main"><img src="~/img/svg/news.svg" /><span>@Localizer["news"]</span></a></li>
+            <li class="nav-list"><a asp-controller="Community" asp-action="Index" asp-area="Main"><img src="~/img/svg/community.svg" /><span>@Localizer["community"]</span></a></li>
+            <li class="nav-list"><a asp-controller="Members" asp-action="Index" asp-area="Main"><img src="~/img/svg/members.svg" /><span>@Localizer["members"]</span></a></li>
+            <li class="nav-list"><a asp-controller="Store" asp-action="Index" asp-area="Main"><img src="~/img/svg/store.svg" /><span>@Localizer["store"]</span></a></li>
+            <li class="nav-list"><a asp-controller="Market" asp-action="Index" asp-area="Main"><img src="~/img/svg/market.svg" /><span>@Localizer["market"]</span></a></li>
+            <li class="nav-list"><a asp-controller="Streams" asp-action="Index" asp-area="Main"><img src="~/img/svg/streams.svg" /><span>@Localizer["stream"]</span></a></li>
+            <li class="uk-nav-header">@Localizer["support"]</li>
+            <li class="nav-list"><a href="#modal-report" data-uk-toggle><i class="ico_report"></i><span>@Localizer["report"]</span></a></li>
+            <li class="nav-list"><a href="#modal-help" data-uk-toggle><i class="ico_help"></i><span>@Localizer["help"]</span></a></li>
+        </ul>
+    </div>
+</aside>

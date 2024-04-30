@@ -1,0 +1,251 @@
+@model TeamHost.Areas.Account.Controllers.ChatsController.ViewModelChats;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+
+<h3 class="uk-text-lead">Chats</h3>
+<div class="uk-grid uk-grid-small" data-uk-grid>
+    <div class="uk-width-1-3@l">
+        <div class="chat-user-list">
+            <div class="chat-user-list__box">
+                <div class="chat-user-list__head">
+                    <div class="avatar"><img src="~/img/profile.png" alt="profile"></div><a class="ico_edit" href="#!"></a><a class="ico_more" href="#!"></a>
+                </div>
+                <div class="chat-user-list__search">
+                    <div class="search">
+                        <div class="search__input"><i class="ico_search"></i><input type="search" name="search" placeholder="Search"></div>
+                    </div>
+                </div>
+                <div class="chat-user-list__body">
+                    <ul>
+                        @foreach (var group in Model.Groups.Select((value, index) =>
+                            new { Value = value, Index = index}))
+                        {
+                            <a asp-area="Account" asp-controller="Chats" asp-action="Index" asp-route-number="@group.Index">
+                                <li>
+                                    <div class="user-item --active">
+                                        <div class="user-item__avatar"><img src="~/img/user-list-1.png" alt="user"></div>
+                                        <div class="user-item__desc">
+                                            <div class="user-item__name">@group.Value.Name</div>
+                                            <div class="user-item__text">Last Message</div>
+                                        </div>
+                                        <div class="user-item__info">
+                                            <div class="user-item__time">4m</div>
+                                            <div class="user-item__count">1</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </a>
+                        }
+                        <li>
+                            <div class="user-item --active">
+                                <div class="user-item__avatar"><img src="~/img/user-list-1.png" alt="user"></div>
+                                <div class="user-item__desc">
+                                    <div class="user-item__name">Lester Barry</div>
+                                    <div class="user-item__text">Let’s play now!</div>
+                                </div>
+                                <div class="user-item__info">
+                                    <div class="user-item__time">4m</div>
+                                    <div class="user-item__count">1</div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-2-3@l">
+        <div class="chat-messages-box">
+            <div class="chat-messages-head">
+                <div class="user-item">
+                    <div class="user-item__avatar"><img src="~/img/user-list-3.png" alt="user"></div>
+                    <div class="user-item__desc">
+                        <div class="user-item__name">Sofia Dior</div>
+                    </div>
+                </div>
+                <div><a class="ico_call" href="#!"></a><a class="ico_info-circle" href="#!"></a></div>
+            </div>
+            <div id="chatroom" class="chat-messages-body">
+                @foreach (var message in Model.MessagesByCurrentGroup)
+                {
+                    @if (Model.UserId == @message.UserId)
+                    {
+                        <div class="messages-item --friend-message">
+                            <div class="messages-item__text">@message.Text</div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="messages-item --your-message">
+                            <div class="messages-item__avatar"><img src="~/img/user-list-3.png" alt="user"></div>
+                            <div class="messages-item__text">@message.Text</div>
+                        </div>
+                    }
+                }
+            </div>
+            <div class="chat-messages-footer">
+                <!--<form asp-action="CreateMessage" asp-controller="Chats" asp-area="Account" method="post">-->
+                    <div class="chat-messages-form">
+                        <div class="chat-messages-form-btns">
+                            <button class="ico_emoji-happy"></button>
+                            <button class="ico_gallery"></button>
+                        </div>
+                        <div class="chat-messages-form-controls">
+                            <input id="message" name="message" class="chat-messages-input" type="text" placeholder="Type a message">
+                        </div>
+                        <div class="chat-messages-form-btn">
+                            <button id="sendBtn" class="ico_microphone" type="button"></button>
+                        </div>
+                    </div>
+                    <!--</form>-->
+            </div>
+            
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+<script>
+    const hubConnection = new signalR.HubConnectionBuilder()
+        .withUrl("/Chats")
+        .build();
+
+    console.log("TRY CONNECT");
+
+    hubConnection.start().then(() => {
+        console.log("TRY CONNECT GROUP");
+        hubConnection.invoke("ConnectToGroup",'@Model.Username', '@Model.UserId', @Model.CurrentGroupId);
+    }).catch(err => console.error(err));
+
+    document.getElementById("sendBtn").addEventListener("click", function () {
+        console.log("receiver");
+        let message = document.getElementById("message").value;
+        console.log("CLICKED BTN");
+        hubConnection.invoke("Send", '@Model.Username', '@Model.UserId', @Model.CurrentGroupId, message)
+            .catch(function (err) {
+                return console.error(err.toString());
+            });
+    });
+
+    hubConnection.on("Notify", function (message) {
+        let divElement = document.createElement("div");
+        let div2 = document.createElement("div")
+        div2.textContent = message;
+        div2.setAttribute('class', 'messages-item__text')
+        divElement.appendChild(div2)
+        divElement.setAttribute('class', 'messages-item --your-message');
+        document.getElementById("chatroom").appendChild(divElement)
+    });
+
+    hubConnection.on("Receive", function (message, username) {
+        let divElement = document.createElement("div");
+        let div2 = document.createElement("div")
+        div2.textContent = message;
+        div2.setAttribute('class', 'messages-item__text')
+        divElement.appendChild(div2)
+        if (username == '@Model.Username') {
+            divElement.setAttribute('class', 'messages-item --friend-message');
+        } else {
+            divElement.setAttribute('class', 'messages-item --your-message');
+        }
+        document.getElementById("chatroom").appendChild(divElement)
+    });
+
+</script>
+    <!--hubConnection.start()
+        .then(function () {
+            document.getElementById("sendBtn").disabled = false;
+        })
+        .catch(function (err) {
+            return console.error(err.toString());
+        });-->
+<!--<div class="messages-item --your-message">
+                    <div class="messages-item__avatar"><img src="~/img/user-list-3.png" alt="user"></div>
+                    <div class="messages-item__text">Which game you play now?</div>
+                </div>
+                <div class="messages-item --friend-message">
+                    <div class="messages-item__text">I play Stronghold Kingdoms</div>
+                </div>
+                <div class="messages-item --your-message">
+                    <div class="messages-item__avatar"><img src="~/img/user-list-3.png" alt="user"></div>
+                    <div class="messages-item__text">What type of game is this? is it a strategy game?</div>
+                </div>
+                <div class="messages-item --friend-message">
+                    <div class="messages-item__text">Yes</div>
+                </div>-->
+
+<!--<li>
+                            <div class="user-item --active">
+                                <div class="user-item__avatar"><img src="~/img/user-list-2.png" alt="user"></div>
+                                <div class="user-item__desc">
+                                    <div class="user-item__name">Emma Stone</div>
+                                    <div class="user-item__text">Are you here?</div>
+                                </div>
+                                <div class="user-item__info">
+                                    <div class="user-item__time">10m</div>
+                                    <div class="user-item__count">2</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="user-item">
+                                <div class="user-item__avatar"><img src="~/img/user-list-3.png" alt="user"></div>
+                                <div class="user-item__desc">
+                                    <div class="user-item__name">Sofia Dior</div>
+                                    <div class="user-item__text">You: Good I will wait you in the ga...</div>
+                                </div>
+                                <div class="user-item__info">
+                                    <div class="user-item__time">1h</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="user-item">
+                                <div class="user-item__avatar"><img src="~/img/user-list-4.png" alt="user"></div>
+                                <div class="user-item__desc">
+                                    <div class="user-item__name">Phillip Martin</div>
+                                    <div class="user-item__text">I will go to sleep</div>
+                                </div>
+                                <div class="user-item__info">
+                                    <div class="user-item__time">3h</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="user-item">
+                                <div class="user-item__avatar"><img src="~/img/user-list-5.png" alt="user"></div>
+                                <div class="user-item__desc">
+                                    <div class="user-item__name">Christian John</div>
+                                    <div class="user-item__text">Am waiting for this new game to be...</div>
+                                </div>
+                                <div class="user-item__info">
+                                    <div class="user-item__time">5h</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="user-item">
+                                <div class="user-item__avatar"><img src="~/img/user-list-6.png" alt="user"></div>
+                                <div class="user-item__desc">
+                                    <div class="user-item__name">Guzman Williams</div>
+                                    <div class="user-item__text">You: I will go AFK</div>
+                                </div>
+                                <div class="user-item__info">
+                                    <div class="user-item__time">1d</div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="user-item">
+                                <div class="user-item__avatar"><img src="~/img/user-list-7.png" alt="user"></div>
+                                <div class="user-item__desc">
+                                    <div class="user-item__name">Olivia Mark</div>
+                                    <div class="user-item__text">I will go AFK</div>
+                                </div>
+                                <div class="user-item__info">
+                                    <div class="user-item__time">1d</div>
+                                </div>
+                            </div>
+                        </li>-->

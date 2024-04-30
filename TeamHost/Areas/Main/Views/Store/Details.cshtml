@@ -1,0 +1,80 @@
+﻿@model TeamHost.Areas.Main.Controllers.StoreController.ViewModelDetails;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+}
+<ul class="uk-breadcrumb">
+    <li><a href="09_games-store.html"><span data-uk-icon="chevron-left"></span><span>Back to Store</span></a></li>
+    <li><span>Team Host</span></li>
+</ul>
+<h3 class="uk-text-lead">Team Host</h3>
+<div class="uk-grid uk-grid-small" data-uk-grid>
+    <div class="uk-width-2-3@s">
+        <div class="gallery">
+            <div class="js-gallery-big gallery-big">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        @foreach (var image in Model.Images)
+                        {
+                            <div class="swiper-slide"><img width="490" src="~/img/Game/Details/@image" alt="image"></div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="js-gallery-small gallery-small">
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        @foreach (var image in Model.Images)
+                        {
+                            <div class="swiper-slide"><img width="150" src="~/img/Game/Details/@image" alt="image"></div>
+                        }
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-3@s">
+        <div class="game-profile-card">
+            <div class="game-profile-card__media"><img src="assets/img/game-profile-card.jpg" alt="game-profile-card"></div>
+            <div class="game-profile-card__intro">
+                <span>
+                    @Model.Game.Description
+                </span>
+            </div>
+            <ul class="game-profile-card__list">
+                <li>
+                    <div>Name Game:</div>
+                    <div>@Model.Game.Name</div>
+                </li>
+                <li>
+                    <div>Reviews:</div>
+                    <div class="game-card__rating"><span>@Model.Game.Rating</span><i class="ico_star"></i><span class="rating-vote">(433)</span></div>
+                </li>
+                <li>
+                    <div>Release date:</div>
+                    <div>@Model.Game.DateReleased</div>
+                </li>
+                <li>
+                    <div>Developer:</div>
+                    <div>@Model.Developer.Name</div>
+                </li>
+                <li>
+                    <div>Platforms:</div>
+                    <div class="game-card__platform"><i class="ico_windows"></i><i class="ico_apple"></i></div>
+                </li>
+            </ul>
+            <ul class="game-profile-card__type">
+                <li><span>Strategy</span></li>
+                <li><span>Survival</span></li>
+                <li><span>City Builder</span></li>
+                <li><span>Dark</span></li>
+            </ul>
+        </div>
+        <div class="game-profile-price">
+            <div class="game-profile-price__value">$@Model.Game.Price USD</div>
+            <button class="uk-button uk-button-buy uk-width-1-1" type="button"><span class="ico_shopping-cart"></span><span>Buy Now</span></button>
+            <button class="uk-button uk-button-favorite uk-width-1-1" type="button"><span class="ico_add-square"></span><span>Add to Favourites</span></button>
+        </div>
+    </div>
+</div>
