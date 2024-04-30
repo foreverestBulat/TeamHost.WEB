@@ -117,7 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="title" xml:space="preserve">
-    <value>TeamHost.WEB - Join now and play mighty games!</value>
+  <data name="achievementprogress" xml:space="preserve">
+    <value>Achievement Progress</value>
+  </data>
+  <data name="badges" xml:space="preserve">
+    <value>Badges</value>
+  </data>
+  <data name="bio" xml:space="preserve">
+    <value>Bio</value>
+  </data>
+  <data name="games" xml:space="preserve">
+    <value>Games</value>
+  </data>
+  <data name="next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="recentactivity" xml:space="preserve">
+    <value>Recent Activity</value>
+  </data>
+  <data name="selectacategory" xml:space="preserve">
+    <value>Select a Category</value>
+  </data>
+  <data name="uploaditem" xml:space="preserve">
+    <value>Upload Item</value>
+  </data>
+  <data name="viewall" xml:space="preserve">
+    <value>View All</value>
   </data>
 </root>

@@ -1,4 +1,6 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer
 @model WebTeamHost.App.Features.Users.Commands.Register.RegisterUserCommand;
 @{
 }
@@ -8,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>TeamHost - Join now and play mighty games!</title>
+    <title>TeamHost - @Localizer["joinnowandplaymightygames"]</title>
     <meta content="Templines" name="author">
     <meta content="TeamHost" name="description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,24 +40,24 @@
                         <div class="form-login__social">
                         </div>
                         <div class="form-login__box">
-                            <div class="uk-heading-line uk-text-center"><span>Registration</span></div>
+                            <div class="uk-heading-line uk-text-center"><span>@Localizer["registration"]</span></div>
                             <form asp-action="Register" asp-controller="Profile" asp-area="Account" method="post">
                                 <div class="uk-margin">
-                                    <input class="uk-input" asp-for="Email" type="text" placeholder="Email">
+                                    <input class="uk-input" asp-for="Email" type="text" placeholder="@Localizer["email"]">
                                 </div>
                                 <div class="uk-margin">
-                                    <input class="uk-input" asp-for="Username" type="text" placeholder="Username">
+                                    <input class="uk-input" asp-for="Username" type="text" placeholder="@Localizer["username"]">
                                 </div>
                                 <div class="uk-margin">
-                                    <input class="uk-input" asp-for="Password" type="password" placeholder="Password">
+                                    <input class="uk-input" asp-for="Password" type="password" placeholder="@Localizer["password"]">
                                 </div>
                                 <div class="uk-margin">
-                                    <button class="uk-button uk-button-danger uk-width-1-1" type="submit">Register</button>
+                                    <button class="uk-button uk-button-danger uk-width-1-1" type="submit">@Localizer["register"]</button>
                                 </div>
                                 <hr>
                                 <div class="uk-text-center">
-                                    <span>Don’t have an account?</span>
-                                    <a class="uk-margin-small-left" asp-action="Login" asp-controller="Profile" asp-area="Account">Log In</a>
+                                    <span>@Localizer["doyouhaveanaccount"]</span>
+                                    <a class="uk-margin-small-left" asp-action="Login" asp-controller="Profile" asp-area="Account">@Localizer["login"]</a>
                                 </div>
                             </form>
                         </div>

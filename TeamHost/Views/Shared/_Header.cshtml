@@ -1,3 +1,8 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers;
+@using Microsoft.AspNetCore.Mvc.Localization;
+@inject IViewLocalizer Localizer;
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<WebTeamHost.Domain.Entities.User> UserManager;
 <header class="page-header">
     <div class="page-header__inner">
         <div class="page-header__sidebar">
@@ -7,15 +12,74 @@
         <div class="page-header__content">
             <div class="page-header__search">
                 <div class="search">
-                    <div class="search__input"><i class="ico_search"></i><input type="search" name="search" placeholder="Search"></div>
+                    <div class="search__input"><i class="ico_search"></i><input type="search" name="search" placeholder="@Localizer["search"]"></div>
                     <div class="search__btn"><button type="button"><i class="ico_microphone"></i></button></div>
                 </div>
             </div>
+
             <div class="page-header__action">
+
+                <ul class="uk-subnav uk-nav-lang  uk-subnav-pill" uk-margin>
+                    <li>
+                        <a href="#">
+                            
+                            @Localizer["language"]
+                            <span uk-icon="icon: triangle-down"></span>
+
+                        </a>
+                        <div uk-dropdown="mode: hover">
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li><a asp-area="Home" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="ru"> <img src="assets/img/germany.png" alt="profile" class="profile">@Localizer["ru"]</a></li>
+                                <li><a asp-area="Home" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en"> <img src="assets/img/italy.png" alt="profile" class="profile">@Localizer["en"]</a></li>
+                                <li><a asp-area="Home" asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="th"> <img src="assets/img/italy.png" alt="profile" class="profile">@Localizer["th"]</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+
                 <a class="action-btn" asp-action="Index" asp-controller="Chat" asp-area="Account"><i class="ico_message"></i><span></span></a>
                 <a class="action-btn" href="#!"><i class="ico_notification"></i><span></span></a>
-                <a class="profile" asp-action="Index" asp-controller="Profile" asp-area="Account"><img src="~/img/profile.png" alt="profile"></a>
-                <a class="profile" asp-action="Logout" asp-controller="Profile" asp-area="Account">Log Out</a>
+
+                <ul class="uk-subnav uk-subnav-pill" uk-margin>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>
+                            <a href="#">
+                                <img src="assets/img/profile.png" alt="profile" class="profile">
+                                @Localizer["hi"], @UserManager.GetUserName(User)
+                                <span uk-icon="icon: triangle-down"></span>
+                            </a>
+                            <div uk-dropdown="mode: click">
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li>
+                                        <a class="profile" asp-action="Index" asp-controller="Profile" asp-area="Account">
+                                            @Localizer["myaccount"]
+                                        </a>
+                                    </li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li>
+                                        <a asp-action="Logout" asp-controller="Profile" asp-area="Account">
+                                            @Localizer["logout"]
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </li>
+                    }
+                    else
+                    {
+                        <a asp-action="Login" asp-controller="Profile" asp-area="Account">
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li>                                
+                                        @Localizer["login"]
+                                </li>
+                            </ul>
+                        </a>
+                    }
+                </ul>
             </div>
         </div>
     </div>

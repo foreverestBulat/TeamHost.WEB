@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Localization;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using TeamHost.Models;
@@ -19,6 +21,19 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult ChangeLanguage(string culture)
+    {
+        Console.WriteLine(culture);
+        //Response.Cookies.Append(
+        //    CookieRequestCultureProvider.DefaultCookieName,
+        //    CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+        //    new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30) }
+        //);
+
+        return RedirectToAction("Index");
     }
 
     public IActionResult Privacy()
