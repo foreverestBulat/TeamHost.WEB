@@ -17,7 +17,6 @@ builder.Services.AddLocalization(options => options.ResourcesPath = "Resources")
 builder.Services.AddControllersWithViews()
     .AddViewLocalization();
 
-
 CultureInfo[] supportedCultures = new[]
 {
     new CultureInfo("en"),
