@@ -5,7 +5,6 @@ using WebTeamHost.SignalR.Hubs;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationLayer();
