@@ -21,7 +21,6 @@
     <ProjectReference Include="..\..\WebTeamHost\WebTeamHost.Domain\WebTeamHost.Domain.csproj" />
     <ProjectReference Include="..\..\WebTeamHost\WebTeamHost.Infrastructure\WebTeamHost.Infrastructure.csproj" />
     <ProjectReference Include="..\..\WebTeamHost\WebTeamHost.Persistance\WebTeamHost.Persistance.csproj" />
-    <ProjectReference Include="..\..\WebTeamHost\WebTeamHost.Redis\WebTeamHost.Redis.csproj" />
     <ProjectReference Include="..\..\WebTeamHost\WebTeamHost.Shared\WebTeamHost.Shared.csproj" />
     <ProjectReference Include="..\..\WebTeamHost\WebTeamHost.SignalR\WebTeamHost.SignalR.csproj" />
   </ItemGroup>

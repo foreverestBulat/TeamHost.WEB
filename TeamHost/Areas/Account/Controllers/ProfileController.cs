@@ -41,7 +41,7 @@ public class ProfileController : Controller
         return View(new ViewModelDetails()
         {
             UserName = _userManager.GetUserName(User),
-            About = _mediator.Send(new GetUserInfoByUserQuery(_userManager.GetUserId(User))).Result.Data.About
+            //About = _mediator.Send(new GetUserInfoByUserQuery(_userManager.GetUserId(User))).Result.Data.About
         });
     }
 
