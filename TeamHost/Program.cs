@@ -20,9 +20,7 @@ builder.Services.AddControllersWithViews()
 var app = builder.Build();
 
 app.UseRequestLocalization();
-
 app.UseRouting();
-
 
 if (!app.Environment.IsDevelopment())
 {
@@ -31,9 +29,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseAuthentication();
 app.UseAuthorization();
 

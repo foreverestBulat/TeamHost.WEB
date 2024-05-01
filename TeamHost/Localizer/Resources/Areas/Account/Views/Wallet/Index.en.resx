@@ -117,46 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="actiongames" xml:space="preserve">
-    <value>เกมการกระทำ</value>
+  <data name="activities" xml:space="preserve">
+    <value>Activities</value>
   </data>
-  <data name="bestgames" xml:space="preserve">
-    <value>เกมที่ดีที่สุด</value>
+  <data name="available" xml:space="preserve">
+    <value>Available</value>
   </data>
-  <data name="categoryall" xml:space="preserve">
-    <value>ประเภท:ทั้งหมด</value>
+  <data name="edit" xml:space="preserve">
+    <value>Edit</value>
   </data>
-  <data name="createnewlist" xml:space="preserve">
-    <value>สร้างรายการใหม่</value>
+  <data name="paymentmethod" xml:space="preserve">
+    <value>Payment Method</value>
   </data>
-  <data name="free" xml:space="preserve">
-    <value>ฟรี</value>
+  <data name="viewall" xml:space="preserve">
+    <value>View All</value>
   </data>
-  <data name="items" xml:space="preserve">
-    <value>รายการ</value>
-  </data>
-  <data name="multiplayergames" xml:space="preserve">
-    <value>หลายเกม</value>
-  </data>
-  <data name="myfavourites" xml:space="preserve">
-    <value>รายการโปรดของฉัน</value>
-  </data>
-  <data name="mylists" xml:space="preserve">
-    <value>รายการของฉัน</value>
-  </data>
-  <data name="platformall" xml:space="preserve">
-    <value>แพลตฟอร์ม:ทั้งหมด</value>
-  </data>
-  <data name="racinggames" xml:space="preserve">
-    <value>เกมส์แข่งรถ</value>
-  </data>
-  <data name="search" xml:space="preserve">
-    <value>ค้นหา</value>
-  </data>
-  <data name="sortbyprice" xml:space="preserve">
-    <value>เรียงตาม:ราคา</value>
-  </data>
-  <data name="strategygames" xml:space="preserve">
-    <value>เกมกลยุทธ์</value>
+  <data name="wallet" xml:space="preserve">
+    <value>Wallet</value>
   </data>
 </root>

@@ -16,7 +16,6 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult ChangeLanguage(string culture)
     {
-        Console.WriteLine(culture);
         Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),

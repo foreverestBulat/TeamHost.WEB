@@ -1,13 +1,14 @@
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TeamHost.Areas.Attributes;
 using WebTeamHost.App.Features.Messages.Queries.GetMessagesByGroup;
 using WebTeamHost.App.Features.UserGroups.Queries.GetGroupsByUser;
 using WebTeamHost.Domain.Entities;
 
 namespace TeamHost.Areas.Account.Controllers;
 
+[AuthorizeAndRedirect]
 [Area("Account")]
 public class ChatsController : Controller
 {
@@ -23,7 +24,6 @@ public class ChatsController : Controller
         _signInManager = signInManager;
     }
 
-    [Authorize]
     [HttpGet]
     public async Task<IActionResult> Index(int number)
     {

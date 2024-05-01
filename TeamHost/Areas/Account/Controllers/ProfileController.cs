@@ -9,6 +9,7 @@ using WebTeamHost.App.Features.UsersInfo.Queries.GetUserInfoById;
 using WebTeamHost.App.Features.UsersInfo.Commands.CreateUserInfo;
 using WebTeamHost.App.Features.UsersInfo.Commands.UpdateUserInfo;
 using WebTeamHost.Domain.Entities;
+using TeamHost.Areas.Attributes;
 
 namespace TeamHost.Areas.Account.Controllers;
 
@@ -32,17 +33,15 @@ public class ProfileController : Controller
     [HttpGet]
     public IActionResult Login() => View();
 
-    [Authorize]
+
+    [AuthorizeAndRedirect]
     [HttpGet]
     public IActionResult Index()
     {
-        //var userName = _userManager.GetUserName(User);
-        //Console.WriteLine(userName);
-        //@model string;
-
         return View(new ViewModelDetails()
         {
-            UserName = _userManager.GetUserName(User)
+            UserName = _userManager.GetUserName(User),
+            About = _mediator.Send(new GetUserInfoByUserQuery(_userManager.GetUserId(User))).Result.Data.About
         });
     }
 
@@ -87,7 +86,7 @@ public class ProfileController : Controller
         return View();
     }
 
-    [Authorize]
+    [AuthorizeAndRedirect]
     [HttpGet]
     public IActionResult UserInfo(CancellationToken cancellationToken)
     {
@@ -98,7 +97,7 @@ public class ProfileController : Controller
     }
 
 
-    [Authorize]
+    [AuthorizeAndRedirect]
     [HttpPost]
     public async Task<IActionResult> Update(GetUserInfoByUserDto getUserInfoByUserDto, CancellationToken cancellationToken)
     {
@@ -114,6 +113,8 @@ public class ProfileController : Controller
     {
         public bool IsAuth { get; set; }
         public string UserName { get; set; }
+
+        public string About { get; set; }
         public IEnumerable<IdentityError> Errors { get; set; }
     }
 }

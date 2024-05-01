@@ -25,7 +25,8 @@ public class StoreController : Controller
     public async Task<IActionResult> Index()
     {
         var result = await _mediator.Send(new GetAllGamesQuery());
-        //Console.WriteLine()
+
+        //Console.WriteLine(result.Data);
         return View(result.Data);
     }
 
@@ -34,14 +35,14 @@ public class StoreController : Controller
     {
         var game = await _mediator.Send(new GetGameByIdQuery(id), cancellationToken);
         var developer = await _mediator.Send(new GetDeveloperByIdQuery(game.Data.DeveloperId), cancellationToken);
-        List<string>? images = JsonSerializer.Deserialize<List<string>>(game.Data.Images);
-
+        //List<string>? images = JsonSerializer.Deserialize<List<string>>(game.Data.Images);
+        //Console.WriteLine(game.Data.Images);
         return View(
             new ViewModelDetails()
             {
                 Game = game.Data,
                 Developer = developer.Data,
-                Images = images
+                Images = new List<string>() { game.Data.Images }
             });
     }
 

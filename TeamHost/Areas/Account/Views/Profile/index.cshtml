@@ -17,7 +17,7 @@
                     <div class="user-info__avatar"><img src="~/img/profile.png" alt="profile"></div>
                     <div class="user-info__box">
                         <div class="user-info__title">@Model.UserName</div>
-                        <div class="user-info__text">Egypt, Member since May 2022</div>
+                        <div class="user-info__text">@Model.About</div>
                     </div>
                 </div><a class="uk-button uk-button-danger" asp-action="UserInfo" asp-controller="Profile" asp-area="Account"><i class="ico_edit"></i><span class="uk-margin-small-left">Edit Profile</span></a>
             </div>

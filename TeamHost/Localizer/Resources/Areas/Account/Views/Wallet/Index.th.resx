@@ -117,7 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="title" xml:space="preserve">
-    <value>TeamHost.WEB - Join now and play mighty games!</value>
+  <data name="activities" xml:space="preserve">
+    <value>กิจกรรม</value>
+  </data>
+  <data name="available" xml:space="preserve">
+    <value>มีจำหน่าย</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>แก้ไข</value>
+  </data>
+  <data name="paymentmethod" xml:space="preserve">
+    <value>วิธีการชำระเงิน</value>
+  </data>
+  <data name="viewall" xml:space="preserve">
+    <value>ดูทั้งหมด</value>
+  </data>
+  <data name="wallet" xml:space="preserve">
+    <value>กระเป๋าสตางค์</value>
   </data>
 </root>

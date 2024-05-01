@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using TeamHost.Areas.Attributes;
 using WebTeamHost.App.Features.Groups.Commands.CreateGroup;
 using WebTeamHost.Domain.Entities;
 //using WebTeamHost.Application.Features.UserGroups.Queries.HasGroupUserWithUserByOne;
@@ -22,19 +23,10 @@ public class FriendsController : Controller
         _signInManager = signInManager;
     }
 
-    [Authorize]
+    [AuthorizeAndRedirect]
     [HttpGet]
     public IActionResult Index()
     {
-        //var users = _userManager.Users.Where(user => user.Id != _userManager.GetUserId(User)); 
-
-        //foreach (var user in users)
-        //{
-        //    if (user.Id != _userManager.GetUserId(User))
-        //        Console.WriteLine(user.UserName);
-        //}
-
-
         return View(_userManager.Users.Where(user => user.Id != _userManager.GetUserId(User)));
     }
 
